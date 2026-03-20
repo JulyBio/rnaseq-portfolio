@@ -1,0 +1,26 @@
+# raw data / big intermediate
+*.fastq
+*.fastq.gz
+*.fq.gz
+*.bam
+*.sam
+*.cram
+*.gtf
+*.gff
+*.fasta
+*.fa
+*.fai
+
+# snakemake & logs
+.snakemake/
+logs/
+results/logs/
+
+# temp / system
+.DS_Store
+__pycache__/
+*.tmp
+*.swp
+
+# large reports (optional: keep html/pdf if you want)
+# deliverables/**/Sample_Images/
