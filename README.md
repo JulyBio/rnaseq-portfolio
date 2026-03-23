@@ -17,19 +17,37 @@
 A reproducible, deliverable-style bulk RNA-seq analysis project built with **Snakemake + Conda** for a **temperature time-series experiment**.
 
 > [!IMPORTANT]
-> This repository is designed as both:
-> - a **portfolio-style project showcase** for RNA-seq analysis
-> - a **reproducible workflow** that can be rerun from metadata and configuration files
+> This repository combines:
+> - a reproducible RNA-seq workflow driven by metadata and configuration files
+> - a deliverable-oriented output structure for result reporting and project presentation
 
 ---
 
-## Highlights
+## Project summary
 
-- End-to-end bulk RNA-seq workflow with reproducible execution
-- Deliverable-oriented output structure for clear result navigation
-- Designed for a temperature time-series experiment
-- Includes explicit contrast definitions for downstream differential expression analysis
-- Built to be understandable for both technical reviewers and non-specialist readers
+This project focuses on bulk RNA-seq analysis for a temperature time-series experiment, with emphasis on:
+
+- workflow reproducibility
+- metadata-driven execution
+- structured downstream differential expression analysis
+- deliverable-style organization of results
+
+The repository is organized to separate:
+
+- workflow logic
+- project configuration and sample metadata
+- final result deliverables
+
+---
+
+## What this project demonstrates
+
+- workflow orchestration with **Snakemake**
+- environment management with **Conda**
+- standardized RNA-seq result organization
+- contrast-based differential expression analysis
+- downstream functional interpretation through enrichment analysis
+- project packaging for reproducibility and external review
 
 ---
 
@@ -42,15 +60,15 @@ This project analyzes bulk RNA-seq samples from a temperature time-series design
 
 Planned contrasts:
 
-| Contrast ID | Test group | Control group | Rationale |
+| Contrast ID | Test group | Control group | Comparison stage |
 |---|---|---|---|
-| `L123_vs_H123` | `L1, L2, L3` | `H1, H2, H3` | early-stage comparison |
-| `L34_vs_H34` | `L3, L4` | `H3, H4` | transition-stage comparison |
-| `L56_vs_H56` | `L5, L6` | `H5, H6` | mid-stage comparison |
-| `L7to10_vs_H7to10` | `L7, L8, L9, L10` | `H7, H8, H9, H10` | late-stage comparison |
+| `L123_vs_H123` | `L1, L2, L3` | `H1, H2, H3` | early stage |
+| `L34_vs_H34` | `L3, L4` | `H3, H4` | transition stage |
+| `L56_vs_H56` | `L5, L6` | `H5, H6` | middle stage |
+| `L7to10_vs_H7to10` | `L7, L8, L9, L10` | `H7, H8, H9, H10` | late stage |
 
 > [!NOTE]
-> `L3` is intentionally included in two contrasts because its morphology is ambiguous and needs to be evaluated under both comparison schemes.
+> `L3` is intentionally included in two contrasts because it sits at an ambiguous morphological transition point and is therefore evaluated under both comparison schemes.
 
 ---
 
@@ -68,16 +86,16 @@ The analysis is organized into the following major steps:
    Perform transcript quantification or count generation depending on workflow configuration.
 
 4. **Expression profiling**  
-   Generate count/expression matrices and sample-level exploratory analyses such as PCA and correlation.
+   Generate count or expression matrices and perform sample-level exploratory analyses such as PCA and correlation.
 
 5. **Differential expression analysis**  
-   Run contrast-based comparisons and summarize significantly changed genes/transcripts.
+   Run contrast-based comparisons and summarize significantly changed genes or transcripts.
 
 6. **Functional enrichment analysis**  
-   Interpret differential expression results using GO / KEGG / related enrichment approaches.
+   Interpret differential expression results using GO, KEGG, and related enrichment approaches.
 
 7. **Deliverable generation**  
-   Organize outputs into a report-oriented folder structure for easy review.
+   Organize outputs into a report-oriented folder structure for clear navigation.
 
 ### Tool stack
 
@@ -102,7 +120,7 @@ conda activate rnaseq-portfolio
 
 ### 2. Run mini smoke test
 
-This checks whether the workflow can run end-to-end on a small test dataset before using real data.
+This command checks whether the workflow can run end-to-end on a small test dataset.
 
 ```bash
 snakemake --profile profiles/local --configfile tests/mini/config/config.yaml
@@ -122,9 +140,6 @@ Then run:
 ```bash
 snakemake --profile profiles/local
 ```
-
-> [!TIP]
-> For reviewers or HR readers, the most important end-point is usually the final report under `deliverables/report/`.
 
 ---
 
@@ -174,10 +189,9 @@ L7to10_vs_H7to10,"L7;L8;L9;L10","H7;H8;H9;H10"
 
 ## Outputs
 
-> [!TIP]
-> After a successful run, the main entry point is:
->
-> `deliverables/report/report.html`
+The main report entry point is:
+
+- `deliverables/report/report.html`
 
 ### Key output files
 
@@ -227,7 +241,7 @@ The `deliverables/` directory is intentionally organized like an external analys
 | `02.Mapping_Evaluation/` | Mapping QC results, if alignment-based route is enabled |
 | `03.mRNA_Expression_Profile/` | Expression matrices, PCA, and sample correlation plots |
 | `04.Differential_Expression_Analysis/` | DEG tables and per-contrast figures |
-| `05.Gene_Set_Enrichment_Analysis/` | GO / KEGG / related enrichment summaries |
+| `05.Gene_Set_Enrichment_Analysis/` | GO, KEGG, and related enrichment summaries |
 | `report/` | Human-readable final report |
 | `software/` | Software version snapshot for auditability |
 
@@ -238,12 +252,12 @@ The `deliverables/` directory is intentionally organized like an external analys
 | Path | Description |
 |---|---|
 | `workflow/` | Snakemake workflow and modular rules |
-| `scripts/` | R / Python helper scripts |
+| `scripts/` | R and Python helper scripts |
 | `config/` | Pipeline configuration files |
 | `resources/` | Metadata tables and reference notes |
 | `env/` | Conda environment definitions |
 | `tests/mini/` | Mini test dataset and smoke-test configuration |
-| `deliverables/` | Final result package for external review |
+| `deliverables/` | Final result package |
 
 ---
 
@@ -252,7 +266,7 @@ The `deliverables/` directory is intentionally organized like an external analys
 - Workflow engine: **Snakemake**
 - Environment management: **Conda**
 - QC aggregation: **MultiQC**
-- Quantification: configurable (for example **Salmon**)
+- Quantification: configurable, for example **Salmon**
 - Differential expression: **DESeq2** on count-based data
 - Enrichment analysis: configurable downstream interpretation modules
 
@@ -264,16 +278,16 @@ For more detail, see:
 
 ---
 
-## Why this repository is structured this way
+## Project structure rationale
 
-This project is not only intended to run an RNA-seq workflow, but also to demonstrate:
+This repository is structured to keep workflow execution, project metadata, and final outputs clearly separated.
 
-- reproducible analysis design
-- interpretable folder organization
+That separation supports:
+
+- reproducible reruns
+- clearer project navigation
 - contrast-aware downstream analysis
-- deliverable-style presentation for external review
-
-The repository therefore separates **workflow logic**, **metadata/configuration**, and **final deliverables**.
+- cleaner result delivery
 
 ---
 
@@ -292,4 +306,4 @@ Current focus:
 - finalizing sample metadata
 - standardizing contrast definitions
 - improving result organization
-- polishing report-style outputs for portfolio presentation
+- polishing report-style outputs
